@@ -14,7 +14,7 @@ import java.util.TimerTask;
 public class RoutineService extends Service {
 
     //wait time
-    public static final long INTERVAL = 10 * 1000; // 10 seconds
+    public static final long INTERVAL = 10 * 10000; // 10 min
     // run on another Thread to avoid crash
     private Handler mHandler = new Handler();
     // timer handling
@@ -55,7 +55,7 @@ public class RoutineService extends Service {
                 @Override
                 public void run() {
                     // display toast
-                    Toast.makeText(getApplicationContext(), "TEST", Toast.LENGTH_SHORT).show();
+                    GoogleImageRequest.BackgroundRequest(getApplicationContext());
                 }
 
             });
