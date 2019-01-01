@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -114,14 +115,14 @@ public class GoogleImageRequest {
         WallpaperManager myWallpaperManager = WallpaperManager.getInstance(AppContext);
         try {
             myWallpaperManager.setBitmap(fixedBitmap);
+            Toast.makeText(AppContext, "Background Changed!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
     }
 
-
+    
     private static Bitmap returnBitmap(Bitmap originalImage, int width, int height){
         Bitmap background = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
 
