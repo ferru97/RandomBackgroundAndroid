@@ -10,14 +10,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class GoogleImageRequest {
 
     //Custm Search Engine ID
     public static String CSE_ID = "015383445286146004163:s5brxbups1i";
     //Google Project API KEY
     public static String API_KEY = "AIzaSyCVomv1sG6XEJOVOt9yLWb6syL2aZgaauE" ;
+    //search keywords
+    private static String keyword = "naruto smartphone wallpaper";
 
-    private static String keyword = "naruto 1080*1920";
+
 
     public static void BackgroundRequest(Context context)
     {
@@ -30,7 +36,7 @@ public class GoogleImageRequest {
                     @Override
                     public void onResponse(String response) {
                         // Log the first 500 characters of the response string.
-                        Log.i("RESULT",response);
+                        decodeJson(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -41,6 +47,21 @@ public class GoogleImageRequest {
 
     // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+
+    private static void decodeJson(String respnse){
+
+        try{
+            JSONObject obj = new JSONObject(respnse);
+            JSONArray items = new JSONArray(obj.getString("items"));
+
+            int random = (int)(Math.random() * 9 + 0);
+            JSONObject image = new JSONObject(items.getString(random));
+            String link = image.getString("link");
+
+        }catch (JSONException e){Log.e("JSON ERROR",e.toString());}
+
     }
 
 }
