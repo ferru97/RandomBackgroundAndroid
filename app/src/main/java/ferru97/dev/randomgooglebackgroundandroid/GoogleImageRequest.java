@@ -77,7 +77,7 @@ public class GoogleImageRequest {
         ImageRequest request = new ImageRequest(link, new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
-                       //IMAGE DOWNLOADED
+                        setBackground(bitmap);
                     }
                 }, 0, 0, null,
                 new Response.ErrorListener() {
@@ -86,6 +86,13 @@ public class GoogleImageRequest {
                     }
         });
         queue.add(request);
+
+    }
+
+
+    private static void setBackground(Bitmap bitmap){
+
+
 
     }
 
