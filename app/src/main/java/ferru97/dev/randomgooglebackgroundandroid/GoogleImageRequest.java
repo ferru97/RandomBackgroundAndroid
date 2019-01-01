@@ -122,7 +122,7 @@ public class GoogleImageRequest {
 
     }
 
-    
+
     private static Bitmap returnBitmap(Bitmap originalImage, int width, int height){
         Bitmap background = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
 

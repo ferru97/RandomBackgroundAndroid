@@ -100,6 +100,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="112dp"
-        android:text="Change Now" />
+        android:text="Change Now"
+        android:onClick="changeNow"/>
 
 </RelativeLayout>
