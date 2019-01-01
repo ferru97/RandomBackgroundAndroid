@@ -1,8 +1,16 @@
 package ferru97.dev.randomgooglebackgroundandroid;
 
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class GoogleImageRequest {
 
@@ -92,8 +102,40 @@ public class GoogleImageRequest {
 
     private static void setBackground(Bitmap bitmap){
 
+        WindowManager wm = (WindowManager) AppContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        
+
+    }
 
 
+    private static Bitmap returnBitmap(Bitmap originalImage, int width, int height){
+        Bitmap background = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
+
+        float originalWidth = originalImage.getWidth();
+        float originalHeight = originalImage.getHeight();
+
+        Canvas canvas = new Canvas(background);
+
+        float scale = width / originalWidth;
+
+        float xTranslation = 0.0f;
+        float yTranslation = (height - originalHeight * scale) / 2.0f;
+
+        Matrix transformation = new Matrix();
+        transformation.postTranslate(xTranslation, yTranslation);
+        transformation.preScale(scale, scale);
+
+        Paint paint = new Paint();
+        paint.setFilterBitmap(true);
+
+        canvas.drawBitmap(originalImage, transformation, paint);
+
+        return background;
     }
 
 }
