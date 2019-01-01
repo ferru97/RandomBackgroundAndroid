@@ -108,8 +108,17 @@ public class GoogleImageRequest {
         display.getSize(size);
         int width = size.x;
         int height = size.y;
-        
 
+        Bitmap fixedBitmap = returnBitmap(bitmap, width, height);
+
+        WallpaperManager myWallpaperManager = WallpaperManager.getInstance(AppContext);
+        try {
+            myWallpaperManager.setBitmap(fixedBitmap);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
     }
 
 
