@@ -8,10 +8,11 @@ import java.io.Serializable;
 
 public class UserSettings implements Serializable {
 
-    //Custm Search Engine ID
-    private  String CSE_ID ;
     //Google Project API KEY
     private final String API_KEY = "AIzaSyCVomv1sG6XEJOVOt9yLWb6syL2aZgaauE" ;
+
+    //Custm Search Engine ID
+    private  String CSE_ID ;
     //search keywords
     private  String keyword;
     //Delay between background change

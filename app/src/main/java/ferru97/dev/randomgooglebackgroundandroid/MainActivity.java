@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
             CSE_ID.setText(uSettings.getCSE_ID());
             keyword.setText(uSettings.getkeyword());
             delay.setText(String.valueOf(uSettings.getDelay()));
-        }else{
-            Log.e("Caricamento", "NOTFOUND");
         }
 
         OnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
