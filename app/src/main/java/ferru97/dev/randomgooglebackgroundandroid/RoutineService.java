@@ -14,11 +14,13 @@ import java.util.TimerTask;
 public class RoutineService extends Service {
 
     //wait time
-    public static final long INTERVAL = 10 * 10000; // 10 min
+    public static long INTERVAL = 600; // 10 min default
     // run on another Thread to avoid crash
     private Handler mHandler = new Handler();
     // timer handling
     private Timer timer = null;
+    //Service status
+    public static boolean isRunning = false;
 
 
     public RoutineService() {
@@ -33,14 +35,22 @@ public class RoutineService extends Service {
 
     @Override
     public void onCreate() {
+        INTERVAL = MainActivity.uSettings.getDelay() * 60;
         // cancel if already existed
         if(timer != null)
             timer.cancel();
         else
             timer = new Timer();
+        isRunning = true;
 
         // schedule task
         timer.scheduleAtFixedRate(new DelayTesk(), 0, INTERVAL);
+    }
+
+
+    @Override
+    public void onDestroy(){
+        isRunning = false;
     }
 
 

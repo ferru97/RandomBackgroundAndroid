@@ -71,14 +71,14 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <EditText
-        android:hint="Enter you CSE ID"
-        android:id="@+id/editText"
+        android:id="@+id/cseid"
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="0dp"
         android:ems="10"
+        android:hint="Enter you CSE ID"
         android:inputType="textPersonName" />
 
     <Switch
@@ -91,7 +91,8 @@
         android:layout_toStartOf="@+id/textView3"
         android:text="Start Routine "
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
     <Button
         android:id="@+id/button"

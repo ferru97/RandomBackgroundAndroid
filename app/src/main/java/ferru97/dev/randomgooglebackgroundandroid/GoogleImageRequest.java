@@ -29,12 +29,6 @@ import java.io.IOException;
 
 public class GoogleImageRequest {
 
-    //Custm Search Engine ID
-    public static String CSE_ID = "015383445286146004163:s5brxbups1i";
-    //Google Project API KEY
-    public static String API_KEY = "AIzaSyCVomv1sG6XEJOVOt9yLWb6syL2aZgaauE" ;
-    //search keywords
-    private static String keyword = "naruto smartphone wallpaper";
     //App context
     private static  Context AppContext;
 
@@ -44,7 +38,8 @@ public class GoogleImageRequest {
     {
         AppContext = context;
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://www.googleapis.com/customsearch/v1?key="+API_KEY+"&q="+keyword+"&cx="+CSE_ID+"&searchType=image";
+        String url = "https://www.googleapis.com/customsearch/v1?key="+MainActivity.uSettings.getAPI_KEY()+
+                "&q="+MainActivity.uSettings.getkeyword()+" smartphone wallpaper&cx="+MainActivity.uSettings.getCSE_ID()+"&searchType=image";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
