@@ -9,6 +9,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -54,8 +55,8 @@ public class RoutineService extends Service {
 
         mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("Keyword Text")
-                .setContentText("Next background in..")
+                .setContentTitle("Background: "+MainActivity.uSettings.getkeyword())
+                .setContentText("Next Background: "+nextBackgroundTime())
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setOngoing(true);
         startForeground(nID, mBuilder.build());
@@ -87,6 +88,16 @@ public class RoutineService extends Service {
 
             });
         }
+
+    }
+
+    private String nextBackgroundTime(){
+        Date currentTime = Calendar.getInstance().getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentTime);
+        cal.add(Calendar.MINUTE, MainActivity.uSettings.getDelay());
+
+        return String.valueOf(cal.getTime());
 
     }
 
