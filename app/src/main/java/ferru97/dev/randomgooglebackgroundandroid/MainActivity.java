@@ -1,10 +1,14 @@
 package ferru97.dev.randomgooglebackgroundandroid;
 
+import android.Manifest;
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,11 +28,16 @@ public class MainActivity extends AppCompatActivity {
     private EditText delay;
     private Switch OnOff;
     private Intent routineService;
+    public static int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE =1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) 
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
 
         CSE_ID = (EditText) findViewById(R.id.cseid);
         keyword = (EditText) findViewById(R.id.keyword);
@@ -71,8 +80,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Save(View v){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            int name = (int)(Math.random() * 9000 + 1);
+            SaveImage.save(String.valueOf(name),getApplicationContext());
+        }else{
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
+        }
 
-        int name = (int)(Math.random() * 9000 + 1);
-        SaveImage.save(String.valueOf(name),getApplicationContext());
+
     }
 }
