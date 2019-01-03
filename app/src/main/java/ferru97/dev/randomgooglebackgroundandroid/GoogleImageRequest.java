@@ -32,6 +32,9 @@ public class GoogleImageRequest {
     //App context
     private static  Context AppContext;
 
+    //Current Backgroung
+    public static Bitmap currBackground = null;
+
 
 
     public static void BackgroundRequest(Context context)
@@ -84,6 +87,7 @@ public class GoogleImageRequest {
                     @Override
                     public void onResponse(Bitmap bitmap) {
                         setBackground(bitmap);
+                        currBackground = bitmap;
                     }
                 }, 0, 0, null,
                 new Response.ErrorListener() {

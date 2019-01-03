@@ -2,6 +2,9 @@ package ferru97.dev.randomgooglebackgroundandroid;
 
 import android.app.Service;
 import android.content.Intent;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import java.io.File;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,5 +68,11 @@ public class MainActivity extends AppCompatActivity {
     public void changeNow(View v){
 
         GoogleImageRequest.BackgroundRequest(getApplicationContext());
+    }
+
+    public void Save(View v){
+
+        int name = (int)(Math.random() * 9000 + 1);
+        SaveImage.save(String.valueOf(name),getApplicationContext());
     }
 }
